@@ -43,7 +43,7 @@ async function notionScheduleBuilder(semesterName) {
         },
       ],
     },
-  }).catch((err) => { 
+  }).catch((err) => {
     throw new Error(err);
   });
 
@@ -102,6 +102,8 @@ function createSchedule(includeWeekends = false) {
   let svgTemplate = `
   <svg xmlns="http://www.w3.org/2000/svg" width="1260" height="930">
   <!-- Draw the sidebar with days of the week -->
+    <rect x="0" y="0" width="120" height="45" fill="#FeFeFe" stroke="black" />
+
     ${days.map((day, index) => {
     // Calculate the box position
     const x = index * boxWidth + boxWidth;
@@ -268,39 +270,144 @@ function diff_hours(dt2, dt1) {
   return Math.abs(parseFloat(diff.toFixed(2)));
 }
 
-async function uploadSvgToImgur(svg) {
-  try {
-    const response = await axios.post('https://api.imgur.com/3/upload', {
-      image: svg,
-      type: 'base64',
-    }, {
-      headers: {
-        Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
-      },
-    });
-    console.log("id:" + process.env.IMGUR_CLIENT_ID);
+function encodeSvgToBase64(filePath) {
+  const svgData = fs.readFileSync(filePath, 'utf8');
+  const base64Data = Buffer.from(svgData).toString('base64');
+  return base64Data;
+}
 
-    if (response.status === 200 && response.data.success) {
-      return response.data.data.link;
-    } else {
-      throw new Error('Unable to upload SVG to Imgur.');
-    }
-  } catch (error) {
-    throw new Error(`Unable to upload SVG to Imgur: ${error.message}`);
-  }
+// async function uploadSvgToImgur(svg) {
+//   const base64Svg = Buffer.from(svg).toString('base64');
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${process.env.IMGUR_CLIENT_ID}`,
+//         'Content-Type': 'application/json',
+//       },
+//     };
+//     const payload = {
+//       image: base64Svg,
+//       type: 'base64',
+//     };
+//     try {
+//       const response = await axios.post('https://api.imgur.com/3/upload', payload, config);
+//       return response.data.data.link;
+//     } catch (error) {
+//       console.error(error);
+//     }
+// }
+
+const sharp = require('sharp');
+
+async function convertSvgToPng(svgData) {
+  // Use Sharp to convert the SVG data to a PNG buffer
+  const pngBuffer = await sharp(Buffer.from(svgData))
+    .resize({ width: 945, height: 697 })
+    .png()
+    .toBuffer();
+  // Return the PNG buffer
+  return pngBuffer;
 }
 
 
+async function uploadImageToImgur(imagePath) {
+  const image = fs.readFileSync(imagePath, 'base64');
+  const response = await axios.post(
+    'https://api.imgur.com/3/upload',
+    {
+      image: image,
+      type: 'base64'
+    },
+    {
+      headers: {
+        Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }
+  );
+  const imageUrl = response.data.data.link;
+  return imageUrl;
+}
+
+async function addImageToNotionPage(imageUrl, toggleBlockName) {
+  const page = await notion.pages.retrieve({ page_id: process.env.NOTION_PAGE_ID }).catch((error) => {
+    throw new Error(`Error retrieving page: ${error}`);
+  });
+  // Find the toggle block by name
+  console.log(page.properties)
+
+  const toggleBlock = page.properties.toggle[0].items.find(
+    (block) => block.type === 'toggle' && block.toggle.text[0].plain_text === toggleBlockName
+  );
+
+  if (!toggleBlock) {
+    console.log(`Toggle block "${toggleBlockName}" not found.`);
+    return;
+  }
+
+  // Add the image block as a child of the toggle block
+  const imageBlock = {
+    type: 'embed',
+    embed: {
+      url: imageUrl,
+      caption: {
+        text: [
+          {
+            type: 'text',
+            text: {
+              content: 'Image caption'
+            }
+          }
+        ]
+      }
+    }
+  };
+
+  const children = toggleBlock.toggle.children || [];
+  children.push(imageBlock);
+
+  // Update the toggle block's children
+  await notion.blocks.children.update({
+    block_id: toggleBlock.id,
+    children
+  }).catch((error) => {
+    throw new Error(error);
+  });
+
+  console.log(`Image added to toggle block "${toggleBlockName}".`);
+}
+
 async function main() {
   let sched = createSchedule();
-  sched = await notionScheduleBuilder("Fall 2023");
+  const semester = "Spring 2023";
+  sched = await notionScheduleBuilder(semester);
 
   fs.writeFileSync('weekly_schedule.svg', sched);
-  uploadSvgToImgur(sched).then((link) => {
-    console.log(link);
-  }).catch((error) => {
-    console.log(error);
+
+  // Convert the SVG to PNG
+  convertSvgToPng(sched)
+    .then(pngBuffer => {
+      // Write the PNG buffer to a file
+      fs.writeFileSync('output.png', pngBuffer);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  let schedule_link = "https://i.imgur.com/1UAJVFV.png";
+  // await uploadImageToImgur('output.png').then((link) => {
+  //   console.log(link);
+  //   schedule_link = link;
+  // }).catch((error) => {
+  //   throw new Error(error);
+  // });
+  if (schedule_link == 0) {
+    throw new Error("Schedule link is not set");
+  }
+
+  await addImageToNotionPage(schedule_link, semester).catch((error) => {
+    throw new Error(error);
   });
+
 }
 
 main();
