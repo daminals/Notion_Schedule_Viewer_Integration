@@ -70,6 +70,12 @@ async function notionScheduleBuilder(semesterName) {
       scheduleList.push(scheduleText);
     }
     const name = properties.Name.title[0].plain_text;
+    let courseTitle
+    if (properties['Course Name'].rich_text[0] == undefined) {
+      courseTitle = ""
+    } else {
+      courseTitle = properties['Course Name'].rich_text[0].plain_text;
+    }
     // randomly select a color
     const colorKeys = Object.keys(availableColors);
     const randomKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
@@ -80,7 +86,7 @@ async function notionScheduleBuilder(semesterName) {
     // console.log(course, name, color);
 
     for (let j = 0; j < scheduleList.length; j++) {
-      schedule = addCourseToSchedule(schedule, parseCourse(scheduleList[j]), name, "", color);
+      schedule = addCourseToSchedule(schedule, parseCourse(scheduleList[j]), name, courseTitle, color);
     }
   }
   return schedule;
@@ -210,8 +216,8 @@ function addCourseToSchedule(schedule, course, courseTitle, location, color) {
   // Add the SVG elements to the schedule string
   for (let i = 0; i < course.daysOfWeek.length; i++) {
     const rect = `<rect x="${xPos[course.daysOfWeek[i]]}" y="${yPos}" width="${boxWidth}" height="${height}" fill="${color}" stroke="#000" />\n`;
-    const title = `<text x="${xPos[course.daysOfWeek[i]] + 10}" y="${yPos + 20}" font-family="Verdana" font-size="16">${courseTitle}</text>\n`;
-    const subheader = `<text x="${xPos[course.daysOfWeek[i]] + 10}" y="${yPos + 40}" font-family="Verdana" font-size="12">${location}</text>\n`;
+    const title = `<text x="${xPos[course.daysOfWeek[i]] + 5}" y="${yPos + 20}" font-family="Verdana" font-size="16">${courseTitle}</text>\n`;
+    const subheader = `<text x="${xPos[course.daysOfWeek[i]] + 5}" y="${yPos + 35}" font-family="Verdana" font-size="8">${location}</text>\n`;
     const box = rect + title + subheader
     schedule += '\n' + box;
   }
@@ -297,6 +303,7 @@ function encodeSvgToBase64(filePath) {
 // }
 
 const sharp = require('sharp');
+const { get } = require('https');
 
 async function convertSvgToPng(svgData) {
   // Use Sharp to convert the SVG data to a PNG buffer
@@ -376,24 +383,126 @@ async function addImageToNotionPage(imageUrl, toggleBlockName) {
   console.log(`Image added to toggle block "${toggleBlockName}".`);
 }
 
+async function getBlockChildren(blockId) {
+  const response = await notion.blocks.children.list({
+    block_id: blockId,
+    page_size: 50
+  });
+
+  const blockChildren = response.results;
+  while (response.has_more) {
+    response = await notion.blocks.children.list({
+      block_id: blockId,
+      start_cursor: response.next_cursor,
+      page_size: 50
+    });
+    blockChildren.push(...response.results);
+  }
+
+  // console.log(`Retrieved ${blockChildren.length} children of block with ID ${blockId}`);
+  return blockChildren;
+}
+
+
+async function appendImageBlockToPage(imageUrl, pageID) {
+  const headers = {
+    'Notion-Version': '2022-03-16',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${process.env.NOTION_KEY}`,
+  };
+
+  const blockData = {
+    block_id: pageID,
+    children: [
+      {
+        //...other keys excluded
+        "type": "image",
+        //...other keys excluded
+        "image": {
+          "type": "external",
+          "external": {
+            "url": imageUrl
+          }
+        }
+
+      }]
+  };
+  // getBlockChildren(pageID);
+  notion.blocks.children.append(blockData);
+}
+
+
+async function updateImageBlock(blockId, imageUrl) {
+  const response = await notion.blocks.update({
+    block_id: blockId,
+    //...other keys excluded
+    "type": "image",
+    //...other keys excluded
+    "image": {
+      // "type": "external",
+      "external": {
+        "url": imageUrl
+      }
+    }
+  });
+
+  console.log(`Image block with ID ${blockId} updated`);
+  return response;
+}
+
+
+async function getNotionChildren() {
+  const response = await notion.blocks.children.list({
+    block_id: process.env.NOTION_PAGE_ID,
+    page_size: 50,
+  });
+  console.log(response.results[0].toggle.rich_text[0].text);
+  return response.results;
+}
+
+async function updateToggleImg(toggleName, link) {
+  const objects = await getNotionChildren();
+  // search objects for toggle with name toggleName
+  // if found, update image
+  for (let i = 0; i < objects.length; i++) {
+    // if rich text is in toggle
+    if (objects[i].toggle == undefined || objects[i].toggle.rich_text == undefined) continue;
+    if (objects[i].toggle.rich_text[0].text.content == toggleName) {
+      // update image
+      // console.log(objects[i].id);
+      const block_children = await getBlockChildren(objects[i].id);
+      if (block_children.length > 0) {
+        // check if there is an image block
+        for (let j = 0; j < block_children.length; j++) {
+          // check if block_children has type attribute
+          if (block_children[j] == undefined) continue;
+
+          if (block_children[j].type == "image")
+            return await updateImageBlock(block_children[j].id, link);
+        }
+      } 
+        await appendImageBlockToPage(link, objects[i].id);
+    }
+  }
+}
+
 async function main() {
   let sched = createSchedule();
-  const semester = "Spring 2024";
+  const semester = "Fall 2023";
   sched = await notionScheduleBuilder(semester);
 
-  fs.writeFileSync('weekly_schedule.svg', sched);
+  fs.writeFileSync('assets/weekly_schedule.svg', sched);
 
   // Convert the SVG to PNG
-  convertSvgToPng(sched)
+  await convertSvgToPng(sched)
     .then(pngBuffer => {
       // Write the PNG buffer to a file
-      fs.writeFileSync('output.png', pngBuffer);
+      fs.writeFileSync('assets/weekly_schedule.png', pngBuffer);
     })
     .catch(error => {
       console.error(error);
     });
-  let schedule_link = "https://i.imgur.com/1UAJVFV.png";
-  await uploadImageToImgur('output.png').then((link) => {
+  await uploadImageToImgur('assets/weekly_schedule.png').then((link) => {
     console.log(link);
     schedule_link = link;
   }).catch((error) => {
@@ -403,11 +512,7 @@ async function main() {
   if (schedule_link == 0) {
     throw new Error("Schedule link is not set");
   }
-
-  await addImageToNotionPage(schedule_link, semester).catch((error) => {
-    throw new Error(error);
-  });
-
+  await updateToggleImg(semester, schedule_link);
 }
 
 main();
