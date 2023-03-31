@@ -15,7 +15,7 @@ const colors = {
   "Purple": '#C7CEEA',
   "Red": '#FF9AA2',
   "Yellow": '#FADF81',
-  "Brown": '#E6C9A8',
+  // "Brown": '#E6C9A8',
   "Gray": '#CFCFCF',
 };
 
@@ -456,7 +456,7 @@ async function getNotionChildren() {
     block_id: process.env.NOTION_PAGE_ID,
     page_size: 50,
   });
-  console.log(response.results[0].toggle.rich_text[0].text);
+  // console.log(response.results[0].toggle.rich_text[0].text);
   return response.results;
 }
 
@@ -488,7 +488,7 @@ async function updateToggleImg(toggleName, link) {
 
 async function main() {
   let sched = createSchedule();
-  const semester = "Fall 2023";
+  const semester = "Spring 2024";
   sched = await notionScheduleBuilder(semester);
 
   fs.writeFileSync('assets/weekly_schedule.svg', sched);

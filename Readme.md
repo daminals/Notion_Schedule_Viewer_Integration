@@ -1,6 +1,6 @@
 # Schedule Builder
 
-This is a JavaScript project that allows you to create an SVG schedule with courses and timeslots, and integrate it with a Notion database.
+This is a JavaScript project that allows you to create a custom built SVG schedule with courses set to specific timeslots, and integrate it with a Notion database.
 
 ## Installation
 
