@@ -1,5 +1,6 @@
 const { Client } = require('@notionhq/client');
 const fs = require('fs');
+const axios = require('axios');
 
 
 // Load environment variables from .env file
@@ -22,7 +23,7 @@ const colors = {
 // Initialize Notion client
 const notion = new Client({ auth: process.env.NOTION_KEY });
 
-async function notionScheduleBuilder(semesterName: string): Promise<string|undefined> {
+async function notionScheduleBuilder(semesterName) {
   // Query Notion database for schedule information
   const response = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
@@ -42,6 +43,8 @@ async function notionScheduleBuilder(semesterName: string): Promise<string|undef
         },
       ],
     },
+  }).catch((err) => { 
+    throw new Error(err);
   });
 
   if (response.results.length === 0) {
@@ -49,7 +52,7 @@ async function notionScheduleBuilder(semesterName: string): Promise<string|undef
     return;
   }
   // Process schedules
-  let schedule: string = createSchedule();
+  let schedule = createSchedule();
   const availableColors = Object.assign({}, colors);
 
 
@@ -58,19 +61,19 @@ async function notionScheduleBuilder(semesterName: string): Promise<string|undef
     if (properties.Schedule.rich_text[0].plain_text == null) continue;
 
     // Extract schedule text from page properties
-    const scheduleText: string = properties.Schedule.rich_text[0].plain_text;
-    var scheduleList: string[] = [];
+    const scheduleText = properties.Schedule.rich_text[0].plain_text;
+    var scheduleList = [];
     if (scheduleText.includes(';')) {
       scheduleList = scheduleText.split(';');
       // Do something with the scheduleList
     } else {
       scheduleList.push(scheduleText);
     }
-    const name: string = properties.Name.title[0].plain_text;
+    const name = properties.Name.title[0].plain_text;
     // randomly select a color
-    const colorKeys: string[] = Object.keys(availableColors);
-    const randomKey: string = colorKeys[Math.floor(Math.random() * colorKeys.length)];
-    const color: string = availableColors[randomKey];
+    const colorKeys = Object.keys(availableColors);
+    const randomKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+    const color = availableColors[randomKey];
 
     // Remove the selected color from the available colors object
     delete availableColors[randomKey];
@@ -84,19 +87,19 @@ async function notionScheduleBuilder(semesterName: string): Promise<string|undef
 }
 
 // Define the box dimensions
-const boxWidth: number = 120;
-const boxHeight: number = 45;
+const boxWidth = 120;
+const boxHeight = 45;
 
-function createSchedule(includeWeekends: boolean = false) {
+function createSchedule(includeWeekends = false) {
   // Define the days of the week and hours of the day
-  const days: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   if (!includeWeekends) {
     days.splice(5, 2);
   }
-  const hours: string[] = ['8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM'];
+  const hours = ['8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM'];
 
   // Define the SVG code template
-  let svgTemplate: string = `
+  let svgTemplate = `
   <svg xmlns="http://www.w3.org/2000/svg" width="1260" height="930">
   <!-- Draw the sidebar with days of the week -->
     ${days.map((day, index) => {
@@ -164,7 +167,7 @@ function createSchedule(includeWeekends: boolean = false) {
   return svgTemplate;
 }
 
-function removeLastLine(str: string) {
+function removeLastLine(str) {
   const lastNewLineIndex = str.lastIndexOf('\n');
   if (lastNewLineIndex === -1) {
     // If there is no newline character, return the original string
@@ -216,18 +219,18 @@ function addCourseToSchedule(schedule, course, courseTitle, location, color) {
 }
 
 class Course {
-  daysOfWeek: string[];
-  startTime: string;
-  endTime: string;
+  daysOfWeek;
+  startTime;
+  endTime;
 
-  constructor(daysOfWeek: string[], startTime: string, endTime: string) {
+  constructor(daysOfWeek, startTime, endTime) {
     this.daysOfWeek = daysOfWeek;
     this.startTime = startTime;
     this.endTime = endTime;
   }
 }
 
-function parseCourse(courseString: string) {
+function parseCourse(courseString) {
   const [daysOfWeekString, timeString] = courseString.split(": ");
   const daysOfWeek = daysOfWeekString.split("-");
   for (let i = 0; i < daysOfWeek.length; i++) {
@@ -248,7 +251,7 @@ function parseCourse(courseString: string) {
   return new Course(daysOfWeek, startTime, endTime);
 }
 
-function convertTimeTo24Hour(time: string, amOrPm: string, minutes: string) {
+function convertTimeTo24Hour(time, amOrPm, minutes) {
   let hour = parseInt(time);
   if (hour === 12) {
     hour = 0;
@@ -259,19 +262,45 @@ function convertTimeTo24Hour(time: string, amOrPm: string, minutes: string) {
   return `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 }
 
-function diff_hours(dt2: Date, dt1: Date) {
+function diff_hours(dt2, dt1) {
   var diff = (dt2.getTime() - dt1.getTime()) / 1000;
   diff /= (60 * 60);
   return Math.abs(parseFloat(diff.toFixed(2)));
 }
 
-async function main() {
-  let sched: string | undefined = createSchedule();
-  sched = await notionScheduleBuilder("Fall 2023");
-  if (sched==undefined) { 
-    throw new Error("No schedule found");
+async function uploadSvgToImgur(svg) {
+  try {
+    const response = await axios.post('https://api.imgur.com/3/upload', {
+      image: svg,
+      type: 'base64',
+    }, {
+      headers: {
+        Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`,
+      },
+    });
+    console.log("id:" + process.env.IMGUR_CLIENT_ID);
+
+    if (response.status === 200 && response.data.success) {
+      return response.data.data.link;
+    } else {
+      throw new Error('Unable to upload SVG to Imgur.');
+    }
+  } catch (error) {
+    throw new Error(`Unable to upload SVG to Imgur: ${error.message}`);
   }
+}
+
+
+async function main() {
+  let sched = createSchedule();
+  sched = await notionScheduleBuilder("Fall 2023");
+
   fs.writeFileSync('weekly_schedule.svg', sched);
+  uploadSvgToImgur(sched).then((link) => {
+    console.log(link);
+  }).catch((error) => {
+    console.log(error);
+  });
 }
 
 main();
