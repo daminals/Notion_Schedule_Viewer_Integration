@@ -100,14 +100,14 @@ function createSchedule(includeWeekends = false) {
 
   // Define the SVG code template
   let svgTemplate = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="1260" height="930">
+  <svg xmlns="http://www.w3.org/2000/svg" width="723" height="635">
   <!-- Draw the sidebar with days of the week -->
-    <rect x="0" y="0" width="120" height="45" fill="#FeFeFe" stroke="black" />
+    <rect x="1" y="2" width="120" height="45" fill="#FeFeFe" stroke="black" />
 
     ${days.map((day, index) => {
     // Calculate the box position
     const x = index * boxWidth + boxWidth;
-    const y = 0;
+    const y = 2;
 
     // Generate the box SVG code
     return `
@@ -122,7 +122,7 @@ function createSchedule(includeWeekends = false) {
     <!-- Draw the sidebar with times -->
     ${hours.map((hour, index) => {
     // Calculate the box position
-    const x = 0;
+    const x = 1;
     const y = (index + 1) * boxHeight;
 
     // Generate the box SVG code
@@ -300,14 +300,13 @@ const sharp = require('sharp');
 
 async function convertSvgToPng(svgData) {
   // Use Sharp to convert the SVG data to a PNG buffer
-  const pngBuffer = await sharp(Buffer.from(svgData))
-    .resize({ width: 945, height: 697 })
-    .png()
+  const pngBuffer = await sharp(Buffer.from(svgData), { density: 300 })
+    .resize({ width: 731, height: 631 })
+    .png({ compressionLevel: 9 })
     .toBuffer();
   // Return the PNG buffer
   return pngBuffer;
 }
-
 
 async function uploadImageToImgur(imagePath) {
   const image = fs.readFileSync(imagePath, 'base64');
@@ -329,13 +328,13 @@ async function uploadImageToImgur(imagePath) {
   return imageUrl;
 }
 
+
+
 async function addImageToNotionPage(imageUrl, toggleBlockName) {
   const page = await notion.pages.retrieve({ page_id: process.env.NOTION_PAGE_ID }).catch((error) => {
     throw new Error(`Error retrieving page: ${error}`);
   });
-  // Find the toggle block by name
-  console.log(page.properties)
-
+  // https://www.notion.so/Create-Schedule-baf64f5ad9a54d01bf9ff0d459c1dab7?pvs=4#7c2569b06c384eb4bd3f8581ea329c25
   const toggleBlock = page.properties.toggle[0].items.find(
     (block) => block.type === 'toggle' && block.toggle.text[0].plain_text === toggleBlockName
   );
@@ -379,7 +378,7 @@ async function addImageToNotionPage(imageUrl, toggleBlockName) {
 
 async function main() {
   let sched = createSchedule();
-  const semester = "Spring 2023";
+  const semester = "Spring 2024";
   sched = await notionScheduleBuilder(semester);
 
   fs.writeFileSync('weekly_schedule.svg', sched);
@@ -394,12 +393,13 @@ async function main() {
       console.error(error);
     });
   let schedule_link = "https://i.imgur.com/1UAJVFV.png";
-  // await uploadImageToImgur('output.png').then((link) => {
-  //   console.log(link);
-  //   schedule_link = link;
-  // }).catch((error) => {
-  //   throw new Error(error);
-  // });
+  await uploadImageToImgur('output.png').then((link) => {
+    console.log(link);
+    schedule_link = link;
+  }).catch((error) => {
+    throw new Error(error);
+  });
+
   if (schedule_link == 0) {
     throw new Error("Schedule link is not set");
   }
