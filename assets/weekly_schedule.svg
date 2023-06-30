@@ -1,0 +1,718 @@
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="723" height="635">
+  <!-- Draw the sidebar with days of the week -->
+    <rect x="1" y="2" width="120" height="45" fill="#FeFeFe" stroke="black" />
+
+    
+      <rect x="120" y="2" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="180" y="29.5"
+        font-weight="bold" font-size="18" font-family="Verdana" text-anchor="middle">
+        Monday
+      </text>
+      <rect x="240" y="2" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="300" y="29.5"
+        font-weight="bold" font-size="18" font-family="Verdana" text-anchor="middle">
+        Tuesday
+      </text>
+      <rect x="360" y="2" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="420" y="29.5"
+        font-weight="bold" font-size="18" font-family="Verdana" text-anchor="middle">
+        Wednesday
+      </text>
+      <rect x="480" y="2" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="540" y="29.5"
+        font-weight="bold" font-size="18" font-family="Verdana" text-anchor="middle">
+        Thursday
+      </text>
+      <rect x="600" y="2" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="660" y="29.5"
+        font-weight="bold" font-size="18" font-family="Verdana" text-anchor="middle">
+        Friday
+      </text>
+  
+    <!-- Draw the sidebar with times -->
+    
+      <rect x="1" y="45" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="72.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        8AM
+      </text>
+      <rect x="1" y="90" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="117.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        9AM
+      </text>
+      <rect x="1" y="135" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="162.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        10AM
+      </text>
+      <rect x="1" y="180" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="207.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        11AM
+      </text>
+      <rect x="1" y="225" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="252.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        12PM
+      </text>
+      <rect x="1" y="270" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="297.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        1PM
+      </text>
+      <rect x="1" y="315" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="342.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        2PM
+      </text>
+      <rect x="1" y="360" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="387.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        3PM
+      </text>
+      <rect x="1" y="405" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="432.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        4PM
+      </text>
+      <rect x="1" y="450" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="477.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        5PM
+      </text>
+      <rect x="1" y="495" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="522.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        6PM
+      </text>
+      <rect x="1" y="540" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="567.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        7PM
+      </text>
+      <rect x="1" y="585" width="120" height="45"
+        fill="white" stroke="black" />
+      <text x="61" y="612.5"
+        font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        8PM
+      </text>
+  
+    <!-- Draw the schedule boxes -->
+    
+        <rect x="120" y="45" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="72.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+        <rect x="120" y="90" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="117.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="90" x2="240" y2="90"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="90" x2="120" y2="135"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="135" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="162.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="135" x2="240" y2="135"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="135" x2="120" y2="180"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="180" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="207.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="180" x2="240" y2="180"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="180" x2="120" y2="225"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="225" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="252.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="225" x2="240" y2="225"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="225" x2="120" y2="270"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="270" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="297.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="270" x2="240" y2="270"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="270" x2="120" y2="315"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="315" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="342.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="315" x2="240" y2="315"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="315" x2="120" y2="360"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="360" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="387.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="360" x2="240" y2="360"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="360" x2="120" y2="405"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="405" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="432.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="405" x2="240" y2="405"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="405" x2="120" y2="450"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="450" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="477.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="450" x2="240" y2="450"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="450" x2="120" y2="495"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="495" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="522.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="495" x2="240" y2="495"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="495" x2="120" y2="540"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="540" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="567.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="540" x2="240" y2="540"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="540" x2="120" y2="585"
+            stroke="black" stroke-width="1" />
+        <rect x="120" y="585" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="180" y="612.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="120" y1="585" x2="240" y2="585"
+            stroke="black" stroke-width="1" />
+          <line x1="120" y1="585" x2="120" y2="630"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="45" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="72.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+        <rect x="240" y="90" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="117.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="90" x2="360" y2="90"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="90" x2="240" y2="135"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="135" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="162.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="135" x2="360" y2="135"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="135" x2="240" y2="180"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="180" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="207.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="180" x2="360" y2="180"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="180" x2="240" y2="225"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="225" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="252.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="225" x2="360" y2="225"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="225" x2="240" y2="270"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="270" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="297.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="270" x2="360" y2="270"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="270" x2="240" y2="315"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="315" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="342.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="315" x2="360" y2="315"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="315" x2="240" y2="360"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="360" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="387.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="360" x2="360" y2="360"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="360" x2="240" y2="405"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="405" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="432.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="405" x2="360" y2="405"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="405" x2="240" y2="450"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="450" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="477.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="450" x2="360" y2="450"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="450" x2="240" y2="495"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="495" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="522.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="495" x2="360" y2="495"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="495" x2="240" y2="540"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="540" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="567.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="540" x2="360" y2="540"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="540" x2="240" y2="585"
+            stroke="black" stroke-width="1" />
+        <rect x="240" y="585" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="300" y="612.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="240" y1="585" x2="360" y2="585"
+            stroke="black" stroke-width="1" />
+          <line x1="240" y1="585" x2="240" y2="630"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="45" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="72.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+        <rect x="360" y="90" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="117.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="90" x2="480" y2="90"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="90" x2="360" y2="135"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="135" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="162.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="135" x2="480" y2="135"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="135" x2="360" y2="180"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="180" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="207.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="180" x2="480" y2="180"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="180" x2="360" y2="225"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="225" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="252.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="225" x2="480" y2="225"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="225" x2="360" y2="270"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="270" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="297.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="270" x2="480" y2="270"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="270" x2="360" y2="315"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="315" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="342.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="315" x2="480" y2="315"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="315" x2="360" y2="360"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="360" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="387.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="360" x2="480" y2="360"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="360" x2="360" y2="405"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="405" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="432.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="405" x2="480" y2="405"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="405" x2="360" y2="450"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="450" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="477.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="450" x2="480" y2="450"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="450" x2="360" y2="495"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="495" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="522.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="495" x2="480" y2="495"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="495" x2="360" y2="540"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="540" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="567.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="540" x2="480" y2="540"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="540" x2="360" y2="585"
+            stroke="black" stroke-width="1" />
+        <rect x="360" y="585" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="420" y="612.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="360" y1="585" x2="480" y2="585"
+            stroke="black" stroke-width="1" />
+          <line x1="360" y1="585" x2="360" y2="630"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="45" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="72.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+        <rect x="480" y="90" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="117.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="90" x2="600" y2="90"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="90" x2="480" y2="135"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="135" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="162.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="135" x2="600" y2="135"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="135" x2="480" y2="180"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="180" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="207.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="180" x2="600" y2="180"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="180" x2="480" y2="225"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="225" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="252.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="225" x2="600" y2="225"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="225" x2="480" y2="270"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="270" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="297.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="270" x2="600" y2="270"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="270" x2="480" y2="315"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="315" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="342.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="315" x2="600" y2="315"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="315" x2="480" y2="360"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="360" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="387.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="360" x2="600" y2="360"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="360" x2="480" y2="405"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="405" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="432.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="405" x2="600" y2="405"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="405" x2="480" y2="450"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="450" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="477.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="450" x2="600" y2="450"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="450" x2="480" y2="495"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="495" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="522.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="495" x2="600" y2="495"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="495" x2="480" y2="540"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="540" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="567.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="540" x2="600" y2="540"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="540" x2="480" y2="585"
+            stroke="black" stroke-width="1" />
+        <rect x="480" y="585" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="540" y="612.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="480" y1="585" x2="600" y2="585"
+            stroke="black" stroke-width="1" />
+          <line x1="480" y1="585" x2="480" y2="630"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="45" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="72.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+        <rect x="600" y="90" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="117.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="90" x2="720" y2="90"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="90" x2="600" y2="135"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="135" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="162.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="135" x2="720" y2="135"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="135" x2="600" y2="180"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="180" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="207.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="180" x2="720" y2="180"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="180" x2="600" y2="225"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="225" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="252.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="225" x2="720" y2="225"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="225" x2="600" y2="270"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="270" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="297.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="270" x2="720" y2="270"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="270" x2="600" y2="315"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="315" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="342.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="315" x2="720" y2="315"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="315" x2="600" y2="360"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="360" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="387.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="360" x2="720" y2="360"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="360" x2="600" y2="405"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="405" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="432.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="405" x2="720" y2="405"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="405" x2="600" y2="450"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="450" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="477.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="450" x2="720" y2="450"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="450" x2="600" y2="495"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="495" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="522.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="495" x2="720" y2="495"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="495" x2="600" y2="540"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="540" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="567.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="540" x2="720" y2="540"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="540" x2="600" y2="585"
+            stroke="black" stroke-width="1" />
+        <rect x="600" y="585" width="120" height="45"
+          fill="white" stroke="black" />
+        <text x="660" y="612.5"
+          font-weight="bold" font-size="20" text-anchor="middle" font-family="Verdana">
+        </text>
+          <line x1="600" y1="585" x2="720" y2="585"
+            stroke="black" stroke-width="1" />
+          <line x1="600" y1="585" x2="600" y2="630"
+            stroke="black" stroke-width="1" />
+<rect x="240" y="472.5" width="120" height="59.85" fill="#FF9AA2" stroke="#000" />
+<text x="245" y="492.5" font-family="Verdana" font-size="16">CSE 508</text>
+<text x="245" y="507.5" font-family="Verdana" font-size="8">Network Security</text>
+
+<rect x="480" y="472.5" width="120" height="59.85" fill="#FF9AA2" stroke="#000" />
+<text x="485" y="492.5" font-family="Verdana" font-size="16">CSE 508</text>
+<text x="485" y="507.5" font-family="Verdana" font-size="8">Network Security</text>
+
+<rect x="240" y="337.5" width="120" height="59.85" fill="#FFB7B2" stroke="#000" />
+<text x="245" y="357.5" font-family="Verdana" font-size="16">CSE 310</text>
+<text x="245" y="372.5" font-family="Verdana" font-size="8"></text>
+
+<rect x="480" y="337.5" width="120" height="59.85" fill="#FFB7B2" stroke="#000" />
+<text x="485" y="357.5" font-family="Verdana" font-size="16">CSE 310</text>
+<text x="485" y="372.5" font-family="Verdana" font-size="8"></text>
+
+<rect x="240" y="202.5" width="120" height="59.85" fill="#FFDAC1" stroke="#000" />
+<text x="245" y="222.5" font-family="Verdana" font-size="16">CSE 416</text>
+<text x="245" y="237.5" font-family="Verdana" font-size="8"></text>
+
+<rect x="480" y="202.5" width="120" height="59.85" fill="#FFDAC1" stroke="#000" />
+<text x="485" y="222.5" font-family="Verdana" font-size="16">CSE 416</text>
+<text x="485" y="237.5" font-family="Verdana" font-size="8"></text>
+
+<rect x="240" y="135" width="120" height="59.85" fill="#CFCFCF" stroke="#000" />
+<text x="245" y="155" font-family="Verdana" font-size="16">AMS 303</text>
+<text x="245" y="170" font-family="Verdana" font-size="8"></text>
+
+<rect x="480" y="135" width="120" height="59.85" fill="#CFCFCF" stroke="#000" />
+<text x="485" y="155" font-family="Verdana" font-size="16">AMS 303</text>
+<text x="485" y="170" font-family="Verdana" font-size="8"></text>
+
+</svg>

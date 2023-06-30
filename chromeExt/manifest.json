@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Notion Plugin",
+  "description": "Plugin to update Notion schedules",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation"
+  ]
+}
