@@ -1,12 +1,6 @@
 {
-  "name": "schedule-viewer",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "webpack && node bundle.js"
-  },
-  "description": "",
-  "main": "index.js",
   "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
     "@notionhq/client": "^2.2.3",
     "@types/node": "^18.15.11",
     "axios": "^1.3.4",

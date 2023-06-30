@@ -1,10 +1,11 @@
+const functions = require('@google-cloud/functions-framework');
 const { Client } = require('@notionhq/client');
-const fs = require('fs');
+// const fs = require('fs');
 const axios = require('axios');
-
+const sharp = require('sharp');
 
 // Load environment variables from .env file
-require('dotenv').config();
+// require('dotenv').config();
 
 // pastel colors
 const colors = {
@@ -240,6 +241,7 @@ class Course {
 
 function parseCourse(courseString) {
   const [daysOfWeekString, timeString] = courseString.split(": ");
+  // expects datetime in the format of M-T-W-TH-F: 9:00AM-10:00AM
   const daysOfWeek = daysOfWeekString.split("-");
   for (let i = 0; i < daysOfWeek.length; i++) {
     daysOfWeek[i] = daysOfWeek[i].trim();
@@ -247,6 +249,8 @@ function parseCourse(courseString) {
       throw new Error(`Invalid course string: ${courseString}`);
     }
   }
+
+  // expects time in the format of 9:00AM-10:00AM
   const timeRegex = /(\d+):(\d+)(AM|PM)-(\d+):(\d+)(AM|PM)/;
   const timeMatch = courseString.match(timeRegex);
 
@@ -276,35 +280,6 @@ function diff_hours(dt2, dt1) {
   return Math.abs(parseFloat(diff.toFixed(2)));
 }
 
-function encodeSvgToBase64(filePath) {
-  const svgData = fs.readFileSync(filePath, 'utf8');
-  const base64Data = Buffer.from(svgData).toString('base64');
-  return base64Data;
-}
-
-// async function uploadSvgToImgur(svg) {
-//   const base64Svg = Buffer.from(svg).toString('base64');
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${process.env.IMGUR_CLIENT_ID}`,
-//         'Content-Type': 'application/json',
-//       },
-//     };
-//     const payload = {
-//       image: base64Svg,
-//       type: 'base64',
-//     };
-//     try {
-//       const response = await axios.post('https://api.imgur.com/3/upload', payload, config);
-//       return response.data.data.link;
-//     } catch (error) {
-//       console.error(error);
-//     }
-// }
-
-const sharp = require('sharp');
-const { get } = require('https');
-
 async function convertSvgToPng(svgData) {
   // Use Sharp to convert the SVG data to a PNG buffer
   const pngBuffer = await sharp(Buffer.from(svgData), { density: 300 })
@@ -315,12 +290,13 @@ async function convertSvgToPng(svgData) {
   return pngBuffer;
 }
 
-async function uploadImageToImgur(imagePath) {
-  const image = fs.readFileSync(imagePath, 'base64');
+async function uploadImageToImgur(image) {
+  // convert png buffer to base64
+  const base64Image = Buffer.from(image).toString('base64');
   const response = await axios.post(
     'https://api.imgur.com/3/upload',
     {
-      image: image,
+      image: base64Image,
       type: 'base64'
     },
     {
@@ -486,34 +462,37 @@ async function updateToggleImg(toggleName, link) {
   }
 }
 
-async function main() {
+async function updateNotion(semester) {
   let sched = createSchedule();
-  const semester = "Spring 2024";
   sched = await notionScheduleBuilder(semester);
-
-  fs.writeFileSync('assets/weekly_schedule.svg', sched);
-
+  let schedule_link = 0;
   // Convert the SVG to PNG
   await convertSvgToPng(sched)
-    .then(pngBuffer => {
+    .then(async pngBuffer => {
       // Write the PNG buffer to a file
-      fs.writeFileSync('assets/weekly_schedule.png', pngBuffer);
+      // console.log("Writing PNG to file...");
+      await uploadImageToImgur(pngBuffer).then((link) => {
+        console.log(link);
+        schedule_link = link;
+      }).catch((error) => {
+        throw new Error(error);
+      });
+    
     })
     .catch(error => {
       console.error(error);
     });
-  await uploadImageToImgur('assets/weekly_schedule.png').then((link) => {
-    console.log(link);
-    schedule_link = link;
-  }).catch((error) => {
-    throw new Error(error);
-  });
 
   if (schedule_link == 0) {
     throw new Error("Schedule link is not set");
   }
   await updateToggleImg(semester, schedule_link);
+  return schedule_link
 }
 
-main();
-
+functions.http('buildSchedule', async (req, res) => {
+  const requestBody = req.body
+  let schedule_link = await updateNotion(requestBody["semester"])
+  console.log(schedule_link)
+  res.send(`schedule_link: ${schedule_link}`);
+});
